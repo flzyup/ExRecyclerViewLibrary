@@ -56,11 +56,11 @@ import java.util.List;
  * <h3>Glossary of terms:</h3>
  *
  * <ul>
- *     <li><em>Adapter:</em> A subclass of {@link android.support.v7.widget.RecyclerView.Adapter} responsible for providing views
+ *     <li><em>Adapter:</em> A subclass of {@link Adapter} responsible for providing views
  *     that represent items in a data set.</li>
  *     <li><em>Position:</em> The position of a data item within an <em>Adapter</em>.</li>
  *     <li><em>Index:</em> The index of an attached child view as used in a call to
- *     {@link android.view.ViewGroup#getChildAt}. Contrast with <em>Position.</em></li>
+ *     {@link ViewGroup#getChildAt}. Contrast with <em>Position.</em></li>
  *     <li><em>Binding:</em> The process of preparing a child view to display data corresponding
  *     to a <em>position</em> within the adapter.</li>
  *     <li><em>Recycle (view):</em> A view previously used to display data for a specific adapter
@@ -286,7 +286,7 @@ public class RecyclerView extends ViewGroup {
      * Retrieves the previously set adapter or null if no adapter is set.
      *
      * @return The previously set adapter
-     * @see #setAdapter(android.support.v7.widget.RecyclerView.Adapter)
+     * @see #setAdapter(Adapter)
      */
     public Adapter getAdapter() {
         return mAdapter;
@@ -307,12 +307,12 @@ public class RecyclerView extends ViewGroup {
     }
 
     /**
-     * Set the {@link android.support.v7.widget.RecyclerView.LayoutManager} that this RecyclerView will use.
+     * Set the {@link LayoutManager} that this RecyclerView will use.
      *
      * <p>In contrast to other adapter-backed views such as {@link android.widget.ListView}
      * or {@link android.widget.GridView}, RecyclerView allows client code to provide custom
      * layout arrangements for child views. These arrangements are controlled by the
-     * {@link android.support.v7.widget.RecyclerView.LayoutManager}. A LayoutManager must be provided for RecyclerView to function.</p>
+     * {@link LayoutManager}. A LayoutManager must be provided for RecyclerView to function.</p>
      *
      * <p>Several default strategies are provided for common uses such as lists and grids.</p>
      *
@@ -399,7 +399,7 @@ public class RecyclerView extends ViewGroup {
     /**
      * Removes a view from the animatingViews list.
      * @param view The view to be removed
-     * @see #addAnimatingView(android.view.View)
+     * @see #addAnimatingView(View)
      */
     private void removeAnimatingView(View view) {
         if (mNumAnimatingViews > 0) {
@@ -432,7 +432,7 @@ public class RecyclerView extends ViewGroup {
     }
 
     /**
-     * Return the {@link android.support.v7.widget.RecyclerView.LayoutManager} currently responsible for
+     * Return the {@link LayoutManager} currently responsible for
      * layout policy for this RecyclerView.
      *
      * @return The currently bound LayoutManager
@@ -442,12 +442,12 @@ public class RecyclerView extends ViewGroup {
     }
 
     /**
-     * Retrieve this RecyclerView's {@link android.support.v7.widget.RecyclerView.RecycledViewPool}. This method will never return null;
+     * Retrieve this RecyclerView's {@link RecycledViewPool}. This method will never return null;
      * if no pool is set for this view a new one will be created. See
-     * {@link #setRecycledViewPool(android.support.v7.widget.RecyclerView.RecycledViewPool) setRecycledViewPool} for more information.
+     * {@link #setRecycledViewPool(RecycledViewPool) setRecycledViewPool} for more information.
      *
      * @return The pool used to store recycled item views for reuse.
-     * @see #setRecycledViewPool(android.support.v7.widget.RecyclerView.RecycledViewPool)
+     * @see #setRecycledViewPool(RecycledViewPool)
      */
     public RecycledViewPool getRecycledViewPool() {
         return mRecycler.getRecycledViewPool();
@@ -504,7 +504,7 @@ public class RecyclerView extends ViewGroup {
     }
 
     /**
-     * Add an {@link android.support.v7.widget.RecyclerView.ItemDecoration} to this RecyclerView. Item decorations can
+     * Add an {@link ItemDecoration} to this RecyclerView. Item decorations can
      * affect both measurement and drawing of individual item views.
      *
      * <p>Item decorations are ordered. Decorations placed earlier in the list will
@@ -531,7 +531,7 @@ public class RecyclerView extends ViewGroup {
     }
 
     /**
-     * Add an {@link android.support.v7.widget.RecyclerView.ItemDecoration} to this RecyclerView. Item decorations can
+     * Add an {@link ItemDecoration} to this RecyclerView. Item decorations can
      * affect both measurement and drawing of individual item views.
      *
      * <p>Item decorations are ordered. Decorations placed earlier in the list will
@@ -547,13 +547,13 @@ public class RecyclerView extends ViewGroup {
     }
 
     /**
-     * Remove an {@link android.support.v7.widget.RecyclerView.ItemDecoration} from this RecyclerView.
+     * Remove an {@link ItemDecoration} from this RecyclerView.
      *
      * <p>The given decoration will no longer impact the measurement and drawing of
      * item views.</p>
      *
      * @param decor Decoration to remove
-     * @see #addItemDecoration(android.support.v7.widget.RecyclerView.ItemDecoration)
+     * @see #addItemDecoration(ItemDecoration)
      */
     public void removeItemDecoration(ItemDecoration decor) {
         mItemDecorations.remove(decor);
@@ -591,16 +591,16 @@ public class RecyclerView extends ViewGroup {
      * Starts a smooth scroll to an adapter position.
      * <p>
      * To support smooth scrolling, you must override
-     * {@link android.support.v7.widget.RecyclerView.LayoutManager#smoothScrollToPosition(android.support.v7.widget.RecyclerView, android.support.v7.widget.RecyclerView.State, int)} and create a
-     * {@link android.support.v7.widget.RecyclerView.SmoothScroller}.
+     * {@link LayoutManager#smoothScrollToPosition(RecyclerView, State, int)} and create a
+     * {@link SmoothScroller}.
      * <p>
-     * {@link android.support.v7.widget.RecyclerView.LayoutManager} is responsible for creating the actual scroll action. If you want to
+     * {@link LayoutManager} is responsible for creating the actual scroll action. If you want to
      * provide a custom smooth scroll logic, override
-     * {@link android.support.v7.widget.RecyclerView.LayoutManager#smoothScrollToPosition(android.support.v7.widget.RecyclerView, android.support.v7.widget.RecyclerView.State, int)} in your
+     * {@link LayoutManager#smoothScrollToPosition(RecyclerView, State, int)} in your
      * LayoutManager.
      *
      * @param position The adapter position to scroll to
-     * @see android.support.v7.widget.RecyclerView.LayoutManager#smoothScrollToPosition(android.support.v7.widget.RecyclerView, android.support.v7.widget.RecyclerView.State, int)
+     * @see LayoutManager#smoothScrollToPosition(RecyclerView, State, int)
      */
     public void smoothScrollToPosition(int position) {
         mLayout.smoothScrollToPosition(this, mState, position);
@@ -689,7 +689,7 @@ public class RecyclerView extends ViewGroup {
      * <p>Default implementation returns 0.</p>
      *
      * <p>If you want to support scroll bars, override
-     * {@link android.support.v7.widget.RecyclerView.LayoutManager#computeHorizontalScrollOffset(android.support.v7.widget.RecyclerView.State)} in your
+     * {@link RecyclerView.LayoutManager#computeHorizontalScrollOffset(RecyclerView.State)} in your
      * LayoutManager. </p>
      *
      * @return The horizontal offset of the scrollbar's thumb
@@ -713,11 +713,11 @@ public class RecyclerView extends ViewGroup {
      * <p>Default implementation returns 0.</p>
      *
      * <p>If you want to support scroll bars, override
-     * {@link android.support.v7.widget.RecyclerView.LayoutManager#computeHorizontalScrollExtent(android.support.v7.widget.RecyclerView.State)} in your
+     * {@link RecyclerView.LayoutManager#computeHorizontalScrollExtent(RecyclerView.State)} in your
      * LayoutManager.</p>
      *
      * @return The horizontal extent of the scrollbar's thumb
-     * @see android.support.v7.widget.RecyclerView.LayoutManager#computeHorizontalScrollExtent(android.support.v7.widget.RecyclerView.State)
+     * @see RecyclerView.LayoutManager#computeHorizontalScrollExtent(RecyclerView.State)
      */
     @Override
     protected int computeHorizontalScrollExtent() {
@@ -733,11 +733,11 @@ public class RecyclerView extends ViewGroup {
      * <p>Default implementation returns 0.</p>
      *
      * <p>If you want to support scroll bars, override
-     * {@link android.support.v7.widget.RecyclerView.LayoutManager#computeHorizontalScrollRange(android.support.v7.widget.RecyclerView.State)} in your
+     * {@link RecyclerView.LayoutManager#computeHorizontalScrollRange(RecyclerView.State)} in your
      * LayoutManager.</p>
      *
      * @return The total horizontal range represented by the vertical scrollbar
-     * @see android.support.v7.widget.RecyclerView.LayoutManager#computeHorizontalScrollRange(android.support.v7.widget.RecyclerView.State)
+     * @see RecyclerView.LayoutManager#computeHorizontalScrollRange(RecyclerView.State)
      */
     @Override
     protected int computeHorizontalScrollRange() {
@@ -754,7 +754,7 @@ public class RecyclerView extends ViewGroup {
      * <p>Default implementation returns 0.</p>
      *
      * <p>If you want to support scroll bars, override
-     * {@link android.support.v7.widget.RecyclerView.LayoutManager#computeVerticalScrollOffset(android.support.v7.widget.RecyclerView.State)} in your
+     * {@link RecyclerView.LayoutManager#computeVerticalScrollOffset(RecyclerView.State)} in your
      * LayoutManager.</p>
      *
      * @return The vertical offset of the scrollbar's thumb
@@ -776,11 +776,11 @@ public class RecyclerView extends ViewGroup {
      * <p>Default implementation returns 0.</p>
      *
      * <p>If you want to support scroll bars, override
-     * {@link android.support.v7.widget.RecyclerView.LayoutManager#computeVerticalScrollExtent(android.support.v7.widget.RecyclerView.State)} in your
+     * {@link RecyclerView.LayoutManager#computeVerticalScrollExtent(RecyclerView.State)} in your
      * LayoutManager.</p>
      *
      * @return The vertical extent of the scrollbar's thumb
-     * @see android.support.v7.widget.RecyclerView.LayoutManager#computeVerticalScrollExtent(android.support.v7.widget.RecyclerView.State)
+     * @see RecyclerView.LayoutManager#computeVerticalScrollExtent(RecyclerView.State)
      */
     @Override
     protected int computeVerticalScrollExtent() {
@@ -796,11 +796,11 @@ public class RecyclerView extends ViewGroup {
      * <p>Default implementation returns 0.</p>
      *
      * <p>If you want to support scroll bars, override
-     * {@link android.support.v7.widget.RecyclerView.LayoutManager#computeVerticalScrollRange(android.support.v7.widget.RecyclerView.State)} in your
+     * {@link RecyclerView.LayoutManager#computeVerticalScrollRange(RecyclerView.State)} in your
      * LayoutManager.</p>
      *
      * @return The total vertical range represented by the vertical scrollbar
-     * @see android.support.v7.widget.RecyclerView.LayoutManager#computeVerticalScrollRange(android.support.v7.widget.RecyclerView.State)
+     * @see RecyclerView.LayoutManager#computeVerticalScrollRange(RecyclerView.State)
      */
     @Override
     protected int computeVerticalScrollRange() {
@@ -1030,13 +1030,13 @@ public class RecyclerView extends ViewGroup {
     }
 
     /**
-     * Add an {@link android.support.v7.widget.RecyclerView.OnItemTouchListener} to intercept touch events before they are dispatched
+     * Add an {@link OnItemTouchListener} to intercept touch events before they are dispatched
      * to child views or this view's standard scrolling behavior.
      *
      * <p>Client code may use listeners to implement item manipulation behavior. Once a listener
      * returns true from
-     * {@link android.support.v7.widget.RecyclerView.OnItemTouchListener#onInterceptTouchEvent(android.support.v7.widget.RecyclerView, android.view.MotionEvent)} its
-     * {@link android.support.v7.widget.RecyclerView.OnItemTouchListener#onTouchEvent(android.support.v7.widget.RecyclerView, android.view.MotionEvent)} method will be called
+     * {@link OnItemTouchListener#onInterceptTouchEvent(RecyclerView, MotionEvent)} its
+     * {@link OnItemTouchListener#onTouchEvent(RecyclerView, MotionEvent)} method will be called
      * for each incoming MotionEvent until the end of the gesture.</p>
      *
      * @param listener Listener to add
@@ -1046,7 +1046,7 @@ public class RecyclerView extends ViewGroup {
     }
 
     /**
-     * Remove an {@link android.support.v7.widget.RecyclerView.OnItemTouchListener}. It will no longer be able to intercept touch events.
+     * Remove an {@link OnItemTouchListener}. It will no longer be able to intercept touch events.
      *
      * @param listener Listener to remove
      */
@@ -1319,11 +1319,11 @@ public class RecyclerView extends ViewGroup {
     }
 
     /**
-     * Sets the {@link android.support.v7.widget.RecyclerView.ItemAnimator} that will handle animations involving changes
+     * Sets the {@link ItemAnimator} that will handle animations involving changes
      * to the items in this RecyclerView. By default, RecyclerView instantiates and
-     * uses an instance of {@link android.support.v7.widget.DefaultItemAnimator}. Whether item animations are
+     * uses an instance of {@link DefaultItemAnimator}. Whether item animations are
      * enabled for the RecyclerView depends on the ItemAnimator and whether
-     * the LayoutManager {@link android.support.v7.widget.RecyclerView.LayoutManager#supportsPredictiveItemAnimations()
+     * the LayoutManager {@link LayoutManager#supportsPredictiveItemAnimations()
      * supports item animations}.
      *
      * @param animator The ItemAnimator being set. If null, no animations will occur
@@ -1343,7 +1343,7 @@ public class RecyclerView extends ViewGroup {
      * Gets the current ItemAnimator for this RecyclerView. A null return value
      * indicates that there is no animator and that item changes will happen without
      * any animations. By default, RecyclerView instantiates and
-     * uses an instance of {@link android.support.v7.widget.DefaultItemAnimator}.
+     * uses an instance of {@link DefaultItemAnimator}.
      *
      * @return ItemAnimator The current ItemAnimator. If null, no animations will occur
      * when changes occur to the items in this RecyclerView.
@@ -1383,9 +1383,9 @@ public class RecyclerView extends ViewGroup {
      * The overall approach figures out what items exist before/after layout and
      * infers one of the five above states for each of the items. Then the animations
      * are set up accordingly:
-     * PERSISTENT views are moved ({@link android.support.v7.widget.RecyclerView.ItemAnimator#animateMove(android.support.v7.widget.RecyclerView.ViewHolder, int, int, int, int)})
-     * REMOVED views are removed ({@link android.support.v7.widget.RecyclerView.ItemAnimator#animateRemove(android.support.v7.widget.RecyclerView.ViewHolder)})
-     * ADDED views are added ({@link android.support.v7.widget.RecyclerView.ItemAnimator#animateAdd(android.support.v7.widget.RecyclerView.ViewHolder)})
+     * PERSISTENT views are moved ({@link ItemAnimator#animateMove(ViewHolder, int, int, int, int)})
+     * REMOVED views are removed ({@link ItemAnimator#animateRemove(ViewHolder)})
+     * ADDED views are added ({@link ItemAnimator#animateAdd(ViewHolder)})
      * DISAPPEARING views are moved off screen
      * APPEARING views are moved on screen
      */
@@ -1896,7 +1896,7 @@ public class RecyclerView extends ViewGroup {
     }
 
     /**
-     * Retrieve the {@link android.support.v7.widget.RecyclerView.ViewHolder} for the given child view.
+     * Retrieve the {@link ViewHolder} for the given child view.
      *
      * @param child Child of this RecyclerView to query for its ViewHolder
      * @return The child view's ViewHolder
@@ -1971,7 +1971,7 @@ public class RecyclerView extends ViewGroup {
 
     /**
      * Return the ViewHolder for the item with the given id. The RecyclerView must
-     * use an Adapter with {@link android.support.v7.widget.RecyclerView.Adapter#setHasStableIds(boolean) stableIds} to
+     * use an Adapter with {@link Adapter#setHasStableIds(boolean) stableIds} to
      * return a non-null value.
      *
      * @param id The id for the requested item
@@ -2014,7 +2014,7 @@ public class RecyclerView extends ViewGroup {
 
     /**
      * Offset the bounds of all child views by <code>dy</code> pixels.
-     * Useful for implementing simple scrolling in {@link android.support.v7.widget.RecyclerView.LayoutManager LayoutManagers}.
+     * Useful for implementing simple scrolling in {@link LayoutManager LayoutManagers}.
      *
      * @param dy Vertical pixel offset to apply to the bounds of all child views
      */
@@ -2030,7 +2030,7 @@ public class RecyclerView extends ViewGroup {
      *
      * <p>Subclasses of RecyclerView may want to perform extra bookkeeping or modifications
      * of child views as they become attached. This will be called before a
-     * {@link android.support.v7.widget.RecyclerView.LayoutManager} measures or lays out the view and is a good time to perform these
+     * {@link LayoutManager} measures or lays out the view and is a good time to perform these
      * changes.</p>
      *
      * @param child Child view that is now attached to this RecyclerView and its associated window
@@ -2043,7 +2043,7 @@ public class RecyclerView extends ViewGroup {
      *
      * <p>Subclasses of RecyclerView may want to perform extra bookkeeping or modifications
      * of child views as they become detached. This will be called as a
-     * {@link android.support.v7.widget.RecyclerView.LayoutManager} fully detaches the child view from the parent and its window.</p>
+     * {@link LayoutManager} fully detaches the child view from the parent and its window.</p>
      *
      * @param child Child view that is now detached from this RecyclerView and its associated window
      */
@@ -2052,7 +2052,7 @@ public class RecyclerView extends ViewGroup {
 
     /**
      * Offset the bounds of all child views by <code>dx</code> pixels.
-     * Useful for implementing simple scrolling in {@link android.support.v7.widget.RecyclerView.LayoutManager LayoutManagers}.
+     * Useful for implementing simple scrolling in {@link LayoutManager LayoutManagers}.
      *
      * @param dx Horizontal pixel offset to apply to the bounds of all child views
      */
@@ -2380,7 +2380,7 @@ public class RecyclerView extends ViewGroup {
      * <p>A "scrapped" view is a view that is still attached to its parent RecyclerView but
      * that has been marked for removal or reuse.</p>
      *
-     * <p>Typical use of a Recycler by a {@link android.support.v7.widget.RecyclerView.LayoutManager} will be to obtain views for
+     * <p>Typical use of a Recycler by a {@link LayoutManager} will be to obtain views for
      * an adapter's data set representing the data at a given position or item ID.
      * If the view to be reused is considered "dirty" the adapter will be asked to rebind it.
      * If not, the view can be quickly reused by the LayoutManager with no further work.
@@ -2466,8 +2466,8 @@ public class RecyclerView extends ViewGroup {
         /**
          * Obtain a view initialized for the given position.
          *
-         * <p>This method should be used by {@link android.support.v7.widget.RecyclerView.LayoutManager} implementations to obtain
-         * views to represent data from an {@link android.support.v7.widget.RecyclerView.Adapter}.</p>
+         * <p>This method should be used by {@link LayoutManager} implementations to obtain
+         * views to represent data from an {@link Adapter}.</p>
          *
          * <p>The Recycler may reuse a scrap or detached view from a shared pool if one is
          * available for the correct view type. If the adapter has not indicated that the
@@ -2902,7 +2902,7 @@ public class RecyclerView extends ViewGroup {
      * Base class for an Adapter
      *
      * <p>Adapters provide a binding from an app-specific data set to views that are displayed
-     * within a {@link android.support.v7.widget.RecyclerView}.</p>
+     * within a {@link RecyclerView}.</p>
      */
     public static abstract class Adapter<VH extends ViewHolder> {
         private final AdapterDataObservable mObservable = new AdapterDataObservable();
@@ -2979,8 +2979,8 @@ public class RecyclerView extends ViewGroup {
         /**
          * Called when a view created by this adapter has been recycled.
          *
-         * <p>A view is recycled when a {@link android.support.v7.widget.RecyclerView.LayoutManager} decides that it no longer
-         * needs to be attached to its parent {@link android.support.v7.widget.RecyclerView}. This can be because it has
+         * <p>A view is recycled when a {@link LayoutManager} decides that it no longer
+         * needs to be attached to its parent {@link RecyclerView}. This can be because it has
          * fallen out of visibility or a set of cached views represented by views still
          * attached to the parent RecyclerView. If an item view has large or expensive data
          * bound to it such as large bitmaps, this may be a good place to release those
@@ -2996,7 +2996,7 @@ public class RecyclerView extends ViewGroup {
          *
          * <p>This can be used as a reasonable signal that the view is about to be seen
          * by the user. If the adapter previously freed any resources in
-         * {@link #onViewDetachedFromWindow(android.support.v7.widget.RecyclerView.ViewHolder) onViewDetachedFromWindow}
+         * {@link #onViewDetachedFromWindow(RecyclerView.ViewHolder) onViewDetachedFromWindow}
          * those resources should be restored here.</p>
          *
          * @param holder Holder of the view being attached
@@ -3220,18 +3220,18 @@ public class RecyclerView extends ViewGroup {
         /**
          * Returns whether this LayoutManager supports automatic item animations.
          * A LayoutManager wishing to support item animations should obey certain
-         * rules as outlined in {@link #onLayoutChildren(android.support.v7.widget.RecyclerView.Recycler, android.support.v7.widget.RecyclerView.State)}.
+         * rules as outlined in {@link #onLayoutChildren(Recycler, State)}.
          * The default return value is <code>false</code>, so subclasses of LayoutManager
          * will not get predictive item animations by default.
          *
          * <p>Whether item animations are enabled in a RecyclerView is determined both
          * by the return value from this method and the
-         * {@link android.support.v7.widget.RecyclerView#setItemAnimator(android.support.v7.widget.RecyclerView.ItemAnimator) ItemAnimator} set on the
+         * {@link RecyclerView#setItemAnimator(ItemAnimator) ItemAnimator} set on the
          * RecyclerView itself. If the RecyclerView has a non-null ItemAnimator but this
          * method returns false, then simple item animations will be enabled, in which
          * views that are moving onto or off of the screen are simply faded in/out. If
          * the RecyclerView has a non-null ItemAnimator and this method returns true,
-         * then there will be two calls to {@link #onLayoutChildren(android.support.v7.widget.RecyclerView.Recycler, android.support.v7.widget.RecyclerView.State)} to
+         * then there will be two calls to {@link #onLayoutChildren(Recycler, State)} to
          * setup up the information needed to more intelligently predict where appearing
          * and disappearing views should be animated from/to.</p>
          *
@@ -3274,9 +3274,9 @@ public class RecyclerView extends ViewGroup {
          * adapter will result in animations to add new or appearing items, removed or
          * disappearing items, and moved items. If a LayoutManager returns false from
          * {@link #supportsPredictiveItemAnimations()}, which is the default, and runs a
-         * normal layout operation during {@link #onLayoutChildren(android.support.v7.widget.RecyclerView.Recycler, android.support.v7.widget.RecyclerView.State)}, the
+         * normal layout operation during {@link #onLayoutChildren(Recycler, State)}, the
          * RecyclerView will have enough information to run those animations in a simple
-         * way. For example, the default ItemAnimator, {@link android.support.v7.widget.DefaultItemAnimator}, will
+         * way. For example, the default ItemAnimator, {@link DefaultItemAnimator}, will
          * simple fade views in and out, whether they are actuall added/removed or whether
          * they are moved on or off the screen due to other add/remove operations.
          *
@@ -3284,12 +3284,12 @@ public class RecyclerView extends ViewGroup {
          * animated onto and off of the screen according to where the items exist when they
          * are not on screen, then the LayoutManager should return true from
          * {@link #supportsPredictiveItemAnimations()} and add additional logic to
-         * {@link #onLayoutChildren(android.support.v7.widget.RecyclerView.Recycler, android.support.v7.widget.RecyclerView.State)}. Supporting predictive animations
-         * means that {@link #onLayoutChildren(android.support.v7.widget.RecyclerView.Recycler, android.support.v7.widget.RecyclerView.State)} will be called twice;
+         * {@link #onLayoutChildren(Recycler, State)}. Supporting predictive animations
+         * means that {@link #onLayoutChildren(Recycler, State)} will be called twice;
          * once as a "pre" layout step to determine where items would have been prior to
          * a real layout, and again to do the "real" layout. In the pre-layout phase,
          * items will remember their pre-layout positions to allow them to be laid out
-         * appropriately. Also, {@link android.support.v7.widget.RecyclerView.LayoutParams#isItemRemoved() removed} items will
+         * appropriately. Also, {@link LayoutParams#isItemRemoved() removed} items will
          * be returned from the scrap to help determine correct placement of other items.
          * These removed items should not be added to the child list, but should be used
          * to help calculate correct positioning of other views, including views that
@@ -3325,11 +3325,11 @@ public class RecyclerView extends ViewGroup {
          *
          * <p>LayoutManagers will often want to use a custom <code>LayoutParams</code> type
          * to store extra information specific to the layout. Client code should subclass
-         * {@link android.support.v7.widget.RecyclerView.LayoutParams} for this purpose.</p>
+         * {@link RecyclerView.LayoutParams} for this purpose.</p>
          *
          * <p><em>Important:</em> if you use your own custom <code>LayoutParams</code> type
          * you must also override
-         * {@link #checkLayoutParams(android.support.v7.widget.RecyclerView.LayoutParams)},
+         * {@link #checkLayoutParams(LayoutParams)},
          * {@link #generateLayoutParams(android.view.ViewGroup.LayoutParams)} and
          * {@link #generateLayoutParams(android.content.Context, android.util.AttributeSet)}.</p>
          *
@@ -3357,7 +3357,7 @@ public class RecyclerView extends ViewGroup {
          *
          * <p><em>Important:</em> if you use your own custom <code>LayoutParams</code> type
          * you must also override
-         * {@link #checkLayoutParams(android.support.v7.widget.RecyclerView.LayoutParams)},
+         * {@link #checkLayoutParams(LayoutParams)},
          * {@link #generateLayoutParams(android.view.ViewGroup.LayoutParams)} and
          * {@link #generateLayoutParams(android.content.Context, android.util.AttributeSet)}.</p>
          *
@@ -3380,7 +3380,7 @@ public class RecyclerView extends ViewGroup {
          *
          * <p><em>Important:</em> if you use your own custom <code>LayoutParams</code> type
          * you must also override
-         * {@link #checkLayoutParams(android.support.v7.widget.RecyclerView.LayoutParams)},
+         * {@link #checkLayoutParams(LayoutParams)},
          * {@link #generateLayoutParams(android.view.ViewGroup.LayoutParams)} and
          * {@link #generateLayoutParams(android.content.Context, android.util.AttributeSet)}.</p>
          *
@@ -3460,8 +3460,8 @@ public class RecyclerView extends ViewGroup {
 
         /**
          * <p>Smooth scroll to the specified adapter position.</p>
-         * <p>To support smooth scrolling, override this method, create your {@link android.support.v7.widget.RecyclerView.SmoothScroller}
-         * instance and call {@link #startSmoothScroll(android.support.v7.widget.RecyclerView.SmoothScroller)}.
+         * <p>To support smooth scrolling, override this method, create your {@link SmoothScroller}
+         * instance and call {@link #startSmoothScroll(SmoothScroller)}.
          * </p>
          * @param recyclerView The RecyclerView to which this layout manager is attached
          * @param state    Current State of RecyclerView
@@ -3508,8 +3508,8 @@ public class RecyclerView extends ViewGroup {
 
         /**
          * Add a view to the currently attached RecyclerView if needed. LayoutManagers should
-         * use this method to add views obtained from a {@link android.support.v7.widget.RecyclerView.Recycler} using
-         * {@link android.support.v7.widget.RecyclerView.Recycler#getViewForPosition(int)}.
+         * use this method to add views obtained from a {@link Recycler} using
+         * {@link Recycler#getViewForPosition(int)}.
          *
          * @param child View to add
          * @param index Index to add child at
@@ -3546,8 +3546,8 @@ public class RecyclerView extends ViewGroup {
 
         /**
          * Add a view to the currently attached RecyclerView if needed. LayoutManagers should
-         * use this method to add views obtained from a {@link android.support.v7.widget.RecyclerView.Recycler} using
-         * {@link android.support.v7.widget.RecyclerView.Recycler#getViewForPosition(int)}.
+         * use this method to add views obtained from a {@link Recycler} using
+         * {@link Recycler#getViewForPosition(int)}.
          *
          * @param child View to add
          */
@@ -3563,7 +3563,7 @@ public class RecyclerView extends ViewGroup {
          * Remove a view from the currently attached RecyclerView if needed. LayoutManagers should
          * use this method to completely remove a child view that is no longer needed.
          * LayoutManagers should strongly consider recycling removed views using
-         * {@link android.support.v7.widget.RecyclerView.Recycler#recycleView(android.view.View)}.
+         * {@link Recycler#recycleView(android.view.View)}.
          *
          * @param child View to remove
          */
@@ -3583,7 +3583,7 @@ public class RecyclerView extends ViewGroup {
          * Remove a view from the currently attached RecyclerView if needed. LayoutManagers should
          * use this method to completely remove a child view that is no longer needed.
          * LayoutManagers should strongly consider recycling removed views using
-         * {@link android.support.v7.widget.RecyclerView.Recycler#recycleView(android.view.View)}.
+         * {@link Recycler#recycleView(android.view.View)}.
          *
          * @param index Index of the child view to remove
          */
@@ -3634,7 +3634,7 @@ public class RecyclerView extends ViewGroup {
          * @return The adapter position of the item which is rendered by this View.
          */
         public int getPosition(View view) {
-            return ((LayoutParams) view.getLayoutParams()).getViewPosition();
+            return ((RecyclerView.LayoutParams) view.getLayoutParams()).getViewPosition();
         }
 
         /**
@@ -3663,11 +3663,11 @@ public class RecyclerView extends ViewGroup {
          *
          * <p>LayoutManagers may want to perform a lightweight detach operation to rearrange
          * views currently attached to the RecyclerView. Generally LayoutManager implementations
-         * will want to use {@link #detachAndScrapView(android.view.View, android.support.v7.widget.RecyclerView.Recycler)}
+         * will want to use {@link #detachAndScrapView(android.view.View, RecyclerView.Recycler)}
          * so that the detached view may be rebound and reused.</p>
          *
          * <p>If a LayoutManager uses this method to detach a view, it <em>must</em>
-         * {@link #attachView(android.view.View, int, android.support.v7.widget.RecyclerView.LayoutParams) reattach}
+         * {@link #attachView(android.view.View, int, RecyclerView.LayoutParams) reattach}
          * or {@link #removeDetachedView(android.view.View) fully remove} the detached view
          * before the LayoutManager entry point method called by RecyclerView returns.</p>
          *
@@ -3685,11 +3685,11 @@ public class RecyclerView extends ViewGroup {
          *
          * <p>LayoutManagers may want to perform a lightweight detach operation to rearrange
          * views currently attached to the RecyclerView. Generally LayoutManager implementations
-         * will want to use {@link #detachAndScrapView(android.view.View, android.support.v7.widget.RecyclerView.Recycler)}
+         * will want to use {@link #detachAndScrapView(android.view.View, RecyclerView.Recycler)}
          * so that the detached view may be rebound and reused.</p>
          *
          * <p>If a LayoutManager uses this method to detach a view, it <em>must</em>
-         * {@link #attachView(android.view.View, int, android.support.v7.widget.RecyclerView.LayoutParams) reattach}
+         * {@link #attachView(android.view.View, int, RecyclerView.LayoutParams) reattach}
          * or {@link #removeDetachedView(android.view.View) fully remove} the detached view
          * before the LayoutManager entry point method called by RecyclerView returns.</p>
          *
@@ -3708,7 +3708,7 @@ public class RecyclerView extends ViewGroup {
         /**
          * Reattach a previously {@link #detachView(android.view.View) detached} view.
          * This method should not be used to reattach views that were previously
-         * {@link #detachAndScrapView(android.view.View, android.support.v7.widget.RecyclerView.Recycler)}  scrapped}.
+         * {@link #detachAndScrapView(android.view.View, RecyclerView.Recycler)}  scrapped}.
          *
          * @param child Child to reattach
          * @param index Intended child index for child
@@ -3727,7 +3727,7 @@ public class RecyclerView extends ViewGroup {
         /**
          * Reattach a previously {@link #detachView(android.view.View) detached} view.
          * This method should not be used to reattach views that were previously
-         * {@link #detachAndScrapView(android.view.View, android.support.v7.widget.RecyclerView.Recycler)}  scrapped}.
+         * {@link #detachAndScrapView(android.view.View, RecyclerView.Recycler)}  scrapped}.
          *
          * @param child Child to reattach
          * @param index Intended child index for child
@@ -3739,7 +3739,7 @@ public class RecyclerView extends ViewGroup {
         /**
          * Reattach a previously {@link #detachView(android.view.View) detached} view.
          * This method should not be used to reattach views that were previously
-         * {@link #detachAndScrapView(android.view.View, android.support.v7.widget.RecyclerView.Recycler)}  scrapped}.
+         * {@link #detachAndScrapView(android.view.View, RecyclerView.Recycler)}  scrapped}.
          *
          * @param child Child to reattach
          */
@@ -3758,7 +3758,7 @@ public class RecyclerView extends ViewGroup {
         }
 
         /**
-         * Detach a child view and add it to a {@link android.support.v7.widget.RecyclerView.Recycler Recycler's} scrap heap.
+         * Detach a child view and add it to a {@link Recycler Recycler's} scrap heap.
          *
          * <p>Scrapping a view allows it to be rebound and reused to show updated or
          * different data.</p>
@@ -3772,7 +3772,7 @@ public class RecyclerView extends ViewGroup {
         }
 
         /**
-         * Detach a child view and add it to a {@link android.support.v7.widget.RecyclerView.Recycler Recycler's} scrap heap.
+         * Detach a child view and add it to a {@link Recycler Recycler's} scrap heap.
          *
          * <p>Scrapping a view allows it to be rebound and reused to show updated or
          * different data.</p>
@@ -3905,7 +3905,7 @@ public class RecyclerView extends ViewGroup {
          * Returns true if the RecyclerView this LayoutManager is bound to has focus.
          *
          * @return True if the RecyclerView has focus, false otherwise.
-         * @see android.view.View#isFocused()
+         * @see View#isFocused()
          */
         public boolean isFocused() {
             return mRecyclerView != null && mRecyclerView.isFocused();
@@ -3915,7 +3915,7 @@ public class RecyclerView extends ViewGroup {
          * Returns true if the RecyclerView this LayoutManager is bound to has or contains focus.
          *
          * @return true if the RecyclerView has or contains focus
-         * @see android.view.View#hasFocus()
+         * @see View#hasFocus()
          */
         public boolean hasFocus() {
             return mRecyclerView != null && mRecyclerView.hasFocus();
@@ -4099,12 +4099,12 @@ public class RecyclerView extends ViewGroup {
 
         /**
          * Returns the measured width of the given child, plus the additional size of
-         * any insets applied by {@link android.support.v7.widget.RecyclerView.ItemDecoration ItemDecorations}.
+         * any insets applied by {@link ItemDecoration ItemDecorations}.
          *
          * @param child Child view to query
          * @return child's measured width plus <code>ItemDecoration</code> insets
          *
-         * @see android.view.View#getMeasuredWidth()
+         * @see View#getMeasuredWidth()
          */
         public int getDecoratedMeasuredWidth(View child) {
             final Rect insets = ((LayoutParams) child.getLayoutParams()).mDecorInsets;
@@ -4113,12 +4113,12 @@ public class RecyclerView extends ViewGroup {
 
         /**
          * Returns the measured height of the given child, plus the additional size of
-         * any insets applied by {@link android.support.v7.widget.RecyclerView.ItemDecoration ItemDecorations}.
+         * any insets applied by {@link ItemDecoration ItemDecorations}.
          *
          * @param child Child view to query
          * @return child's measured height plus <code>ItemDecoration</code> insets
          *
-         * @see android.view.View#getMeasuredHeight()
+         * @see View#getMeasuredHeight()
          */
         public int getDecoratedMeasuredHeight(View child) {
             final Rect insets = ((LayoutParams) child.getLayoutParams()).mDecorInsets;
@@ -4127,21 +4127,21 @@ public class RecyclerView extends ViewGroup {
 
         /**
          * Lay out the given child view within the RecyclerView using coordinates that
-         * include any current {@link android.support.v7.widget.RecyclerView.ItemDecoration ItemDecorations}.
+         * include any current {@link ItemDecoration ItemDecorations}.
          *
          * <p>LayoutManagers should prefer working in sizes and coordinates that include
          * item decoration insets whenever possible. This allows the LayoutManager to effectively
          * ignore decoration insets within measurement and layout code. See the following
          * methods:</p>
          * <ul>
-         *     <li>{@link #measureChild(android.view.View, int, int)}</li>
-         *     <li>{@link #measureChildWithMargins(android.view.View, int, int)}</li>
-         *     <li>{@link #getDecoratedLeft(android.view.View)}</li>
-         *     <li>{@link #getDecoratedTop(android.view.View)}</li>
-         *     <li>{@link #getDecoratedRight(android.view.View)}</li>
-         *     <li>{@link #getDecoratedBottom(android.view.View)}</li>
-         *     <li>{@link #getDecoratedMeasuredWidth(android.view.View)}</li>
-         *     <li>{@link #getDecoratedMeasuredHeight(android.view.View)}</li>
+         *     <li>{@link #measureChild(View, int, int)}</li>
+         *     <li>{@link #measureChildWithMargins(View, int, int)}</li>
+         *     <li>{@link #getDecoratedLeft(View)}</li>
+         *     <li>{@link #getDecoratedTop(View)}</li>
+         *     <li>{@link #getDecoratedRight(View)}</li>
+         *     <li>{@link #getDecoratedBottom(View)}</li>
+         *     <li>{@link #getDecoratedMeasuredWidth(View)}</li>
+         *     <li>{@link #getDecoratedMeasuredHeight(View)}</li>
          * </ul>
          *
          * @param child Child to lay out
@@ -4150,7 +4150,7 @@ public class RecyclerView extends ViewGroup {
          * @param right Right edge, with item decoration insets included
          * @param bottom Bottom edge, with item decoration insets included
          *
-         * @see android.view.View#layout(int, int, int, int)
+         * @see View#layout(int, int, int, int)
          */
         public void layoutDecorated(View child, int left, int top, int right, int bottom) {
             final Rect insets = ((LayoutParams) child.getLayoutParams()).mDecorInsets;
@@ -4160,7 +4160,7 @@ public class RecyclerView extends ViewGroup {
 
         /**
          * Returns the left edge of the given child view within its parent, offset by any applied
-         * {@link android.support.v7.widget.RecyclerView.ItemDecoration ItemDecorations}.
+         * {@link ItemDecoration ItemDecorations}.
          *
          * @param child Child to query
          * @return Child left edge with offsets applied
@@ -4172,7 +4172,7 @@ public class RecyclerView extends ViewGroup {
 
         /**
          * Returns the top edge of the given child view within its parent, offset by any applied
-         * {@link android.support.v7.widget.RecyclerView.ItemDecoration ItemDecorations}.
+         * {@link ItemDecoration ItemDecorations}.
          *
          * @param child Child to query
          * @return Child top edge with offsets applied
@@ -4184,7 +4184,7 @@ public class RecyclerView extends ViewGroup {
 
         /**
          * Returns the right edge of the given child view within its parent, offset by any applied
-         * {@link android.support.v7.widget.RecyclerView.ItemDecoration ItemDecorations}.
+         * {@link ItemDecoration ItemDecorations}.
          *
          * @param child Child to query
          * @return Child right edge with offsets applied
@@ -4196,7 +4196,7 @@ public class RecyclerView extends ViewGroup {
 
         /**
          * Returns the bottom edge of the given child view within its parent, offset by any applied
-         * {@link android.support.v7.widget.RecyclerView.ItemDecoration ItemDecorations}.
+         * {@link ItemDecoration ItemDecorations}.
          *
          * @param child Child to query
          * @return Child bottom edge with offsets applied
@@ -4215,9 +4215,9 @@ public class RecyclerView extends ViewGroup {
          * the view to be focused. The default implementation returns null.</p>
          *
          * @param focused   The currently focused view
-         * @param direction One of {@link android.view.View#FOCUS_UP}, {@link android.view.View#FOCUS_DOWN},
-         *                  {@link android.view.View#FOCUS_LEFT}, {@link android.view.View#FOCUS_RIGHT},
-         *                  {@link android.view.View#FOCUS_BACKWARD}, {@link android.view.View#FOCUS_FORWARD}
+         * @param direction One of {@link View#FOCUS_UP}, {@link View#FOCUS_DOWN},
+         *                  {@link View#FOCUS_LEFT}, {@link View#FOCUS_RIGHT},
+         *                  {@link View#FOCUS_BACKWARD}, {@link View#FOCUS_FORWARD}
          *                  or 0 for not applicable
          * @param recycler  The recycler to use for obtaining views for currently offscreen items
          * @param state     Transient state of RecyclerView
@@ -4230,17 +4230,17 @@ public class RecyclerView extends ViewGroup {
 
         /**
          * This method gives a LayoutManager an opportunity to intercept the initial focus search
-         * before the default behavior of {@link android.view.FocusFinder} is used. If this method returns
+         * before the default behavior of {@link FocusFinder} is used. If this method returns
          * null FocusFinder will attempt to find a focusable child view. If it fails
-         * then {@link #onFocusSearchFailed(android.view.View, int, android.support.v7.widget.RecyclerView.Recycler, android.support.v7.widget.RecyclerView.State)}
+         * then {@link #onFocusSearchFailed(View, int, RecyclerView.Recycler, RecyclerView.State)}
          * will be called to give the LayoutManager an opportunity to add new views for items
          * that did not have attached views representing them. The LayoutManager should not add
          * or remove views from this method.
          *
          * @param focused The currently focused view
-         * @param direction One of {@link android.view.View#FOCUS_UP}, {@link android.view.View#FOCUS_DOWN},
-         *                  {@link android.view.View#FOCUS_LEFT}, {@link android.view.View#FOCUS_RIGHT},
-         *                  {@link android.view.View#FOCUS_BACKWARD}, {@link android.view.View#FOCUS_FORWARD}
+         * @param direction One of {@link View#FOCUS_UP}, {@link View#FOCUS_DOWN},
+         *                  {@link View#FOCUS_LEFT}, {@link View#FOCUS_RIGHT},
+         *                  {@link View#FOCUS_BACKWARD}, {@link View#FOCUS_FORWARD}
          * @return A descendant view to focus or null to fall back to default behavior.
          *         The default implementation returns null.
          */
@@ -4250,7 +4250,7 @@ public class RecyclerView extends ViewGroup {
 
         /**
          * Called when a child of the RecyclerView wants a particular rectangle to be positioned
-         * onto the screen. See {@link android.view.ViewParent#requestChildRectangleOnScreen(android.view.View,
+         * onto the screen. See {@link ViewParent#requestChildRectangleOnScreen(android.view.View,
          * android.graphics.Rect, boolean)} for more details.
          *
          * <p>The base implementation will attempt to perform a standard programmatic scroll
@@ -4331,7 +4331,7 @@ public class RecyclerView extends ViewGroup {
          * @param oldAdapter The previous adapter instance. Will be null if there was previously no
          *                   adapter.
          * @param newAdapter The new adapter instance. Might be null if
-         *                   {@link #setAdapter(android.support.v7.widget.RecyclerView.Adapter)} is called with {@code null}.
+         *                   {@link #setAdapter(RecyclerView.Adapter)} is called with {@code null}.
          */
         public void onAdapterChanged(Adapter oldAdapter, Adapter newAdapter) {
         }
@@ -4340,7 +4340,7 @@ public class RecyclerView extends ViewGroup {
          * Called to populate focusable views within the RecyclerView.
          *
          * <p>The LayoutManager implementation should return <code>true</code> if the default
-         * behavior of {@link android.view.ViewGroup#addFocusables(java.util.ArrayList, int)} should be
+         * behavior of {@link ViewGroup#addFocusables(java.util.ArrayList, int)} should be
          * suppressed.</p>
          *
          * <p>The default implementation returns <code>false</code> to trigger RecyclerView
@@ -4349,9 +4349,9 @@ public class RecyclerView extends ViewGroup {
          * @param recyclerView The RecyclerView hosting this LayoutManager
          * @param views List of output views. This method should add valid focusable views
          *              to this list.
-         * @param direction One of {@link android.view.View#FOCUS_UP}, {@link android.view.View#FOCUS_DOWN},
-         *                  {@link android.view.View#FOCUS_LEFT}, {@link android.view.View#FOCUS_RIGHT},
-         *                  {@link android.view.View#FOCUS_BACKWARD}, {@link android.view.View#FOCUS_FORWARD}
+         * @param direction One of {@link View#FOCUS_UP}, {@link View#FOCUS_DOWN},
+         *                  {@link View#FOCUS_LEFT}, {@link View#FOCUS_RIGHT},
+         *                  {@link View#FOCUS_BACKWARD}, {@link View#FOCUS_FORWARD}
          * @param focusableMode The type of focusables to be added.
          *
          * @return true to suppress the default behavior, false to add default focusables after
@@ -4391,13 +4391,13 @@ public class RecyclerView extends ViewGroup {
         /**
          * <p>Override this method if you want to support scroll bars.</p>
          *
-         * <p>Read {@link android.support.v7.widget.RecyclerView#computeHorizontalScrollExtent()} for details.</p>
+         * <p>Read {@link RecyclerView#computeHorizontalScrollExtent()} for details.</p>
          *
          * <p>Default implementation returns 0.</p>
          *
          * @param state Current state of RecyclerView
          * @return The horizontal extent of the scrollbar's thumb
-         * @see android.support.v7.widget.RecyclerView#computeHorizontalScrollExtent()
+         * @see RecyclerView#computeHorizontalScrollExtent()
          */
         public int computeHorizontalScrollExtent(State state) {
             return 0;
@@ -4406,13 +4406,13 @@ public class RecyclerView extends ViewGroup {
         /**
          * <p>Override this method if you want to support scroll bars.</p>
          *
-         * <p>Read {@link android.support.v7.widget.RecyclerView#computeHorizontalScrollOffset()} for details.</p>
+         * <p>Read {@link RecyclerView#computeHorizontalScrollOffset()} for details.</p>
          *
          * <p>Default implementation returns 0.</p>
          *
          * @param state Current State of RecyclerView where you can find total item count
          * @return The horizontal offset of the scrollbar's thumb
-         * @see android.support.v7.widget.RecyclerView#computeHorizontalScrollOffset()
+         * @see RecyclerView#computeHorizontalScrollOffset()
          */
         public int computeHorizontalScrollOffset(State state) {
             return 0;
@@ -4421,13 +4421,13 @@ public class RecyclerView extends ViewGroup {
         /**
          * <p>Override this method if you want to support scroll bars.</p>
          *
-         * <p>Read {@link android.support.v7.widget.RecyclerView#computeHorizontalScrollRange()} for details.</p>
+         * <p>Read {@link RecyclerView#computeHorizontalScrollRange()} for details.</p>
          *
          * <p>Default implementation returns 0.</p>
          *
          * @param state Current State of RecyclerView where you can find total item count
          * @return The total horizontal range represented by the vertical scrollbar
-         * @see android.support.v7.widget.RecyclerView#computeHorizontalScrollRange()
+         * @see RecyclerView#computeHorizontalScrollRange()
          */
         public int computeHorizontalScrollRange(State state) {
             return 0;
@@ -4436,13 +4436,13 @@ public class RecyclerView extends ViewGroup {
         /**
          * <p>Override this method if you want to support scroll bars.</p>
          *
-         * <p>Read {@link android.support.v7.widget.RecyclerView#computeVerticalScrollExtent()} for details.</p>
+         * <p>Read {@link RecyclerView#computeVerticalScrollExtent()} for details.</p>
          *
          * <p>Default implementation returns 0.</p>
          *
          * @param state Current state of RecyclerView
          * @return The vertical extent of the scrollbar's thumb
-         * @see android.support.v7.widget.RecyclerView#computeVerticalScrollExtent()
+         * @see RecyclerView#computeVerticalScrollExtent()
          */
         public int computeVerticalScrollExtent(State state) {
             return 0;
@@ -4451,13 +4451,13 @@ public class RecyclerView extends ViewGroup {
         /**
          * <p>Override this method if you want to support scroll bars.</p>
          *
-         * <p>Read {@link android.support.v7.widget.RecyclerView#computeVerticalScrollOffset()} for details.</p>
+         * <p>Read {@link RecyclerView#computeVerticalScrollOffset()} for details.</p>
          *
          * <p>Default implementation returns 0.</p>
          *
          * @param state Current State of RecyclerView where you can find total item count
          * @return The vertical offset of the scrollbar's thumb
-         * @see android.support.v7.widget.RecyclerView#computeVerticalScrollOffset()
+         * @see RecyclerView#computeVerticalScrollOffset()
          */
         public int computeVerticalScrollOffset(State state) {
             return 0;
@@ -4466,13 +4466,13 @@ public class RecyclerView extends ViewGroup {
         /**
          * <p>Override this method if you want to support scroll bars.</p>
          *
-         * <p>Read {@link android.support.v7.widget.RecyclerView#computeVerticalScrollRange()} for details.</p>
+         * <p>Read {@link RecyclerView#computeVerticalScrollRange()} for details.</p>
          *
          * <p>Default implementation returns 0.</p>
          *
          * @param state Current State of RecyclerView where you can find total item count
          * @return The total vertical range represented by the vertical scrollbar
-         * @see android.support.v7.widget.RecyclerView#computeVerticalScrollRange()
+         * @see RecyclerView#computeVerticalScrollRange()
          */
         public int computeVerticalScrollRange(State state) {
             return 0;
@@ -4527,7 +4527,7 @@ public class RecyclerView extends ViewGroup {
         }
 
         /**
-         * {@link android.view.View#setMeasuredDimension(int, int) Set the measured dimensions} of the
+         * {@link View#setMeasuredDimension(int, int) Set the measured dimensions} of the
          * host RecyclerView.
          *
          * @param widthSize Measured width
@@ -4538,14 +4538,14 @@ public class RecyclerView extends ViewGroup {
         }
 
         /**
-         * @return The host RecyclerView's {@link android.view.View#getMinimumWidth()}
+         * @return The host RecyclerView's {@link View#getMinimumWidth()}
          */
         public int getMinimumWidth() {
             return ViewCompat.getMinimumWidth(mRecyclerView);
         }
 
         /**
-         * @return The host RecyclerView's {@link android.view.View#getMinimumHeight()}
+         * @return The host RecyclerView's {@link View#getMinimumHeight()}
          */
         public int getMinimumHeight() {
             return ViewCompat.getMinimumHeight(mRecyclerView);
@@ -4594,8 +4594,8 @@ public class RecyclerView extends ViewGroup {
      * between items, highlights, visual grouping boundaries and more.
      *
      * <p>All ItemDecorations are drawn in the order they were added, before the item
-     * views (in {@link android.support.v7.widget.RecyclerView.ItemDecoration#onDraw(android.graphics.Canvas, android.support.v7.widget.RecyclerView) onDraw()} and after the items
-     * (in {@link android.support.v7.widget.RecyclerView.ItemDecoration#onDrawOver(android.graphics.Canvas, android.support.v7.widget.RecyclerView)}.</p>
+     * views (in {@link ItemDecoration#onDraw(Canvas, RecyclerView) onDraw()} and after the items
+     * (in {@link ItemDecoration#onDrawOver(Canvas, RecyclerView)}.</p>
      */
     public static abstract class ItemDecoration {
         /**
@@ -4679,7 +4679,7 @@ public class RecyclerView extends ViewGroup {
      * An OnScrollListener can be set on a RecyclerView to receive messages
      * when a scrolling event has occurred on that RecyclerView.
      *
-     * @see android.support.v7.widget.RecyclerView#setOnScrollListener(android.support.v7.widget.RecyclerView.OnScrollListener)
+     * @see RecyclerView#setOnScrollListener(OnScrollListener)
      */
     public interface OnScrollListener {
         public void onScrollStateChanged(int newState);
@@ -4690,7 +4690,7 @@ public class RecyclerView extends ViewGroup {
      * A RecyclerListener can be set on a RecyclerView to receive messages whenever
      * a view is recycled.
      *
-     * @see android.support.v7.widget.RecyclerView#setRecyclerListener(android.support.v7.widget.RecyclerView.RecyclerListener)
+     * @see RecyclerView#setRecyclerListener(RecyclerListener)
      */
     public interface RecyclerListener {
 
@@ -4705,11 +4705,11 @@ public class RecyclerView extends ViewGroup {
     /**
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      *
-     * <p>{@link android.support.v7.widget.RecyclerView.Adapter} implementations should subclass ViewHolder and add fields for caching
-     * potentially expensive {@link android.view.View#findViewById(int)} results.</p>
+     * <p>{@link Adapter} implementations should subclass ViewHolder and add fields for caching
+     * potentially expensive {@link View#findViewById(int)} results.</p>
      *
-     * <p>While {@link android.support.v7.widget.RecyclerView.LayoutParams} belong to the {@link android.support.v7.widget.RecyclerView.LayoutManager},
-     * {@link android.support.v7.widget.RecyclerView.ViewHolder ViewHolders} belong to the adapter. Adapters should feel free to use
+     * <p>While {@link LayoutParams} belong to the {@link LayoutManager},
+     * {@link ViewHolder ViewHolders} belong to the adapter. Adapters should feel free to use
      * their own custom ViewHolder implementations to store data that makes binding view contents
      * easier. Implementations should assume that individual item views will hold strong references
      * to <code>ViewHolder</code> objects and that <code>RecyclerView</code> instances may hold
@@ -4920,7 +4920,7 @@ public class RecyclerView extends ViewGroup {
 
     /**
      * {@link android.view.ViewGroup.MarginLayoutParams LayoutParams} subclass for children of
-     * {@link android.support.v7.widget.RecyclerView}. Custom {@link android.support.v7.widget.RecyclerView.LayoutManager layout managers} are encouraged
+     * {@link RecyclerView}. Custom {@link LayoutManager layout managers} are encouraged
      * to create their own subclass of this <code>LayoutParams</code> class
      * to store any additional required per-child view metadata about the layout.
      */
@@ -4991,8 +4991,8 @@ public class RecyclerView extends ViewGroup {
     }
 
     /**
-     * Observer base class for watching changes to an {@link android.support.v7.widget.RecyclerView.Adapter}.
-     * See {@link android.support.v7.widget.RecyclerView.Adapter#registerAdapterDataObserver(android.support.v7.widget.RecyclerView.AdapterDataObserver)}.
+     * Observer base class for watching changes to an {@link Adapter}.
+     * See {@link Adapter#registerAdapterDataObserver(AdapterDataObserver)}.
      */
     public static abstract class AdapterDataObserver {
         public void onChanged() {
@@ -5016,7 +5016,7 @@ public class RecyclerView extends ViewGroup {
      * <p>Base class for smooth scrolling. Handles basic tracking of the target view position and
      * provides methods to trigger a programmatic scroll.</p>
      *
-     * @see android.support.v7.widget.LinearSmoothScroller
+     * @see LinearSmoothScroller
      */
     public static abstract class SmoothScroller {
 
@@ -5040,10 +5040,10 @@ public class RecyclerView extends ViewGroup {
 
         /**
          * Starts a smooth scroll for the given target position.
-         * <p>In each animation step, {@link android.support.v7.widget.RecyclerView} will check
+         * <p>In each animation step, {@link RecyclerView} will check
          * for the target view and call either
-         * {@link #onTargetFound(android.view.View, android.support.v7.widget.RecyclerView.State, android.support.v7.widget.RecyclerView.SmoothScroller.Action)} or
-         * {@link #onSeekTargetStep(int, int, android.support.v7.widget.RecyclerView.State, android.support.v7.widget.RecyclerView.SmoothScroller.Action)} until
+         * {@link #onTargetFound(android.view.View, RecyclerView.State, SmoothScroller.Action)} or
+         * {@link #onSeekTargetStep(int, int, RecyclerView.State, SmoothScroller.Action)} until
          * SmoothScroller is stopped.</p>
          *
          * <p>Note that if RecyclerView finds the target view, it will automatically stop the
@@ -5077,9 +5077,9 @@ public class RecyclerView extends ViewGroup {
 
         /**
          * Stops running the SmoothScroller in each animation callback. Note that this does not
-         * cancel any existing {@link android.support.v7.widget.RecyclerView.SmoothScroller.Action} updated by
-         * {@link #onTargetFound(android.view.View, android.support.v7.widget.RecyclerView.State, android.support.v7.widget.RecyclerView.SmoothScroller.Action)} or
-         * {@link #onSeekTargetStep(int, int, android.support.v7.widget.RecyclerView.State, android.support.v7.widget.RecyclerView.SmoothScroller.Action)}.
+         * cancel any existing {@link Action} updated by
+         * {@link #onTargetFound(android.view.View, RecyclerView.State, SmoothScroller.Action)} or
+         * {@link #onSeekTargetStep(int, int, RecyclerView.State, SmoothScroller.Action)}.
          */
         final protected void stop() {
             if (!mRunning) {
@@ -5121,7 +5121,7 @@ public class RecyclerView extends ViewGroup {
          * Returns the adapter position of the target item
          *
          * @return Adapter position of the target item or
-         * {@link android.support.v7.widget.RecyclerView#NO_POSITION} if no target view is set.
+         * {@link RecyclerView#NO_POSITION} if no target view is set.
          */
         public int getTargetPosition() {
             return mTargetPosition;
@@ -5150,28 +5150,28 @@ public class RecyclerView extends ViewGroup {
         }
 
         /**
-         * @see android.support.v7.widget.RecyclerView#getChildPosition(android.view.View)
+         * @see RecyclerView#getChildPosition(android.view.View)
          */
         public int getChildPosition(View view) {
             return mRecyclerView.getChildPosition(view);
         }
 
         /**
-         * @see android.support.v7.widget.RecyclerView#getChildCount()
+         * @see RecyclerView#getChildCount()
          */
         public int getChildCount() {
             return mRecyclerView.getChildCount();
         }
 
         /**
-         * @see android.support.v7.widget.RecyclerView.LayoutManager#findViewByPosition(int)
+         * @see RecyclerView.LayoutManager#findViewByPosition(int)
          */
         public View findViewByPosition(int position) {
             return mRecyclerView.mLayout.findViewByPosition(position);
         }
 
         /**
-         * @see android.support.v7.widget.RecyclerView#scrollToPosition(int)
+         * @see RecyclerView#scrollToPosition(int)
          */
         public void instantScrollToPosition(int position) {
             mRecyclerView.scrollToPosition(position);
@@ -5212,7 +5212,7 @@ public class RecyclerView extends ViewGroup {
          * <p>RecyclerView will call this method each time it scrolls until it can find the target
          * position in the layout.</p>
          * <p>SmoothScroller should check dx, dy and if scroll should be changed, update the
-         * provided {@link android.support.v7.widget.RecyclerView.SmoothScroller.Action} to define the next scroll.</p>
+         * provided {@link Action} to define the next scroll.</p>
          *
          * @param dx        Last scroll amount horizontally
          * @param dy        Last scroll amount verticaully
@@ -5224,18 +5224,18 @@ public class RecyclerView extends ViewGroup {
 
         /**
          * Called when the target position is laid out. This is the last callback SmoothScroller
-         * will receive and it should update the provided {@link android.support.v7.widget.RecyclerView.SmoothScroller.Action} to define the scroll
+         * will receive and it should update the provided {@link Action} to define the scroll
          * details towards the target view.
          * @param targetView    The view element which render the target position.
          * @param state         Transient state of RecyclerView
          * @param action        Action instance that you should update to define final scroll action
          *                      towards the targetView
-         * @return An {@link android.support.v7.widget.RecyclerView.SmoothScroller.Action} to finalize the smooth scrolling
+         * @return An {@link Action} to finalize the smooth scrolling
          */
         abstract protected void onTargetFound(View targetView, State state, Action action);
 
         /**
-         * Holds information about a smooth scroll request by a {@link android.support.v7.widget.RecyclerView.SmoothScroller}.
+         * Holds information about a smooth scroll request by a {@link SmoothScroller}.
          */
         public static class Action {
 
@@ -5454,8 +5454,8 @@ public class RecyclerView extends ViewGroup {
             mLayoutState = other.mLayoutState;
         }
 
-        public static final Creator<SavedState> CREATOR
-                = new Creator<SavedState>() {
+        public static final Parcelable.Creator<SavedState> CREATOR
+                = new Parcelable.Creator<SavedState>() {
             @Override
             public SavedState createFromParcel(Parcel in) {
                 return new SavedState(in);
@@ -5567,7 +5567,7 @@ public class RecyclerView extends ViewGroup {
          * If scroll is triggered to make a certain item visible, this value will return the
          * adapter index of that item.
          * @return Adapter index of the target item or
-         * {@link android.support.v7.widget.RecyclerView#NO_POSITION} if there is no target
+         * {@link RecyclerView#NO_POSITION} if there is no target
          * position.
          */
         public int getTargetScrollPosition() {
@@ -5638,12 +5638,12 @@ public class RecyclerView extends ViewGroup {
      * Subclasses of ItemAnimator can be used to implement custom animations for actions on
      * ViewHolder items. The RecyclerView will manage retaining these items while they
      * are being animated, but implementors must call the appropriate "Finished"
-     * method when each item animation is done ({@link #dispatchRemoveFinished(android.support.v7.widget.RecyclerView.ViewHolder)},
-     * {@link #dispatchMoveFinished(android.support.v7.widget.RecyclerView.ViewHolder)}, or {@link #dispatchAddFinished(android.support.v7.widget.RecyclerView.ViewHolder)}).
+     * method when each item animation is done ({@link #dispatchRemoveFinished(ViewHolder)},
+     * {@link #dispatchMoveFinished(ViewHolder)}, or {@link #dispatchAddFinished(ViewHolder)}).
      *
-     * <p>By default, RecyclerView uses {@link android.support.v7.widget.DefaultItemAnimator}</p>
+     * <p>By default, RecyclerView uses {@link DefaultItemAnimator}</p>
      *
-     * @see #setItemAnimator(android.support.v7.widget.RecyclerView.ItemAnimator)
+     * @see #setItemAnimator(ItemAnimator)
      */
     public static abstract class ItemAnimator {
 
@@ -5723,9 +5723,9 @@ public class RecyclerView extends ViewGroup {
 
         /**
          * Called when there are pending animations waiting to be started. This state
-         * is governed by the return values from {@link #animateAdd(android.support.v7.widget.RecyclerView.ViewHolder) animateAdd()},
-         * {@link #animateMove(android.support.v7.widget.RecyclerView.ViewHolder, int, int, int, int) animateMove()}, and
-         * {@link #animateRemove(android.support.v7.widget.RecyclerView.ViewHolder) animateRemove()}, which inform the
+         * is governed by the return values from {@link #animateAdd(ViewHolder) animateAdd()},
+         * {@link #animateMove(ViewHolder, int, int, int, int) animateMove()}, and
+         * {@link #animateRemove(ViewHolder) animateRemove()}, which inform the
          * RecyclerView that the ItemAnimator wants to be called later to start the
          * associated animations. runPendingAnimations() will be scheduled to be run
          * on the next frame.
@@ -5735,14 +5735,14 @@ public class RecyclerView extends ViewGroup {
         /**
          * Called when an item is removed from the RecyclerView. Implementors can choose
          * whether and how to animate that change, but must always call
-         * {@link #dispatchRemoveFinished(android.support.v7.widget.RecyclerView.ViewHolder)} when done, either
+         * {@link #dispatchRemoveFinished(ViewHolder)} when done, either
          * immediately (if no animation will occur) or after the animation actually finishes.
          * The return value indicates whether an animation has been set up and whether the
          * ItemAnimators {@link #runPendingAnimations()} method should be called at the
          * next opportunity. This mechanism allows ItemAnimator to set up individual animations
-         * as separate calls to {@link #animateAdd(android.support.v7.widget.RecyclerView.ViewHolder) animateAdd()},
-         * {@link #animateMove(android.support.v7.widget.RecyclerView.ViewHolder, int, int, int, int) animateMove()}, and
-         * {@link #animateRemove(android.support.v7.widget.RecyclerView.ViewHolder) animateRemove()} come in one by one, then
+         * as separate calls to {@link #animateAdd(ViewHolder) animateAdd()},
+         * {@link #animateMove(ViewHolder, int, int, int, int) animateMove()}, and
+         * {@link #animateRemove(ViewHolder) animateRemove()} come in one by one, then
          * start the animations together in the later call to {@link #runPendingAnimations()}.
          *
          * <p>This method may also be called for disappearing items which continue to exist in the
@@ -5759,14 +5759,14 @@ public class RecyclerView extends ViewGroup {
         /**
          * Called when an item is added to the RecyclerView. Implementors can choose
          * whether and how to animate that change, but must always call
-         * {@link #dispatchAddFinished(android.support.v7.widget.RecyclerView.ViewHolder)} when done, either
+         * {@link #dispatchAddFinished(ViewHolder)} when done, either
          * immediately (if no animation will occur) or after the animation actually finishes.
          * The return value indicates whether an animation has been set up and whether the
          * ItemAnimators {@link #runPendingAnimations()} method should be called at the
          * next opportunity. This mechanism allows ItemAnimator to set up individual animations
-         * as separate calls to {@link #animateAdd(android.support.v7.widget.RecyclerView.ViewHolder) animateAdd()},
-         * {@link #animateMove(android.support.v7.widget.RecyclerView.ViewHolder, int, int, int, int) animateMove()}, and
-         * {@link #animateRemove(android.support.v7.widget.RecyclerView.ViewHolder) animateRemove()} come in one by one, then
+         * as separate calls to {@link #animateAdd(ViewHolder) animateAdd()},
+         * {@link #animateMove(ViewHolder, int, int, int, int) animateMove()}, and
+         * {@link #animateRemove(ViewHolder) animateRemove()} come in one by one, then
          * start the animations together in the later call to {@link #runPendingAnimations()}.
          *
          * <p>This method may also be called for appearing items which were already in the
@@ -5783,14 +5783,14 @@ public class RecyclerView extends ViewGroup {
         /**
          * Called when an item is moved in the RecyclerView. Implementors can choose
          * whether and how to animate that change, but must always call
-         * {@link #dispatchMoveFinished(android.support.v7.widget.RecyclerView.ViewHolder)} when done, either
+         * {@link #dispatchMoveFinished(ViewHolder)} when done, either
          * immediately (if no animation will occur) or after the animation actually finishes.
          * The return value indicates whether an animation has been set up and whether the
          * ItemAnimators {@link #runPendingAnimations()} method should be called at the
          * next opportunity. This mechanism allows ItemAnimator to set up individual animations
-         * as separate calls to {@link #animateAdd(android.support.v7.widget.RecyclerView.ViewHolder) animateAdd()},
-         * {@link #animateMove(android.support.v7.widget.RecyclerView.ViewHolder, int, int, int, int) animateMove()}, and
-         * {@link #animateRemove(android.support.v7.widget.RecyclerView.ViewHolder) animateRemove()} come in one by one, then
+         * as separate calls to {@link #animateAdd(ViewHolder) animateAdd()},
+         * {@link #animateMove(ViewHolder, int, int, int, int) animateMove()}, and
+         * {@link #animateRemove(ViewHolder) animateRemove()} come in one by one, then
          * start the animations together in the later call to {@link #runPendingAnimations()}.
          *
          * @param holder The item that is being moved.
@@ -5839,7 +5839,7 @@ public class RecyclerView extends ViewGroup {
          * animating views can be quickly put into their proper end locations.
          * Implementations should ensure that any animations running on the item
          * are canceled and affected properties are set to their end values.
-         * Also, appropriate dispatch methods (e.g., {@link #dispatchAddFinished(android.support.v7.widget.RecyclerView.ViewHolder)}
+         * Also, appropriate dispatch methods (e.g., {@link #dispatchAddFinished(ViewHolder)}
          * should be called since the animations are effectively done when this
          * method is called.
          *
@@ -5853,7 +5853,7 @@ public class RecyclerView extends ViewGroup {
          * animating views can be quickly put into their proper end locations.
          * Implementations should ensure that any animations running on any items
          * are canceled and affected properties are set to their end values.
-         * Also, appropriate dispatch methods (e.g., {@link #dispatchAddFinished(android.support.v7.widget.RecyclerView.ViewHolder)}
+         * Also, appropriate dispatch methods (e.g., {@link #dispatchAddFinished(ViewHolder)}
          * should be called since the animations are effectively done when this
          * method is called.
          */
@@ -5924,7 +5924,7 @@ public class RecyclerView extends ViewGroup {
          * in an ItemAnimator are finished. This can be used, for example, to delay an action
          * in a data set until currently-running animations are complete.
          *
-         * @see #isRunning(android.support.v7.widget.RecyclerView.ItemAnimator.ItemAnimatorFinishedListener)
+         * @see #isRunning(ItemAnimatorFinishedListener)
          */
         public interface ItemAnimatorFinishedListener {
             void onAnimationsFinished();

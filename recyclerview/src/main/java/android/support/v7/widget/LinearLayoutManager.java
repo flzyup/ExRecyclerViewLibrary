@@ -68,7 +68,7 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager {
 
     /**
      * Many calculations are made depending on orientation. To keep it clean, this interface
-     * helps {@link android.support.v7.widget.LinearLayoutManager} make those decisions.
+     * helps {@link LinearLayoutManager} make those decisions.
      * Based on {@link #mOrientation}, an implementation is lazily created in
      * {@link #ensureRenderState} method.
      */
@@ -1085,12 +1085,12 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager {
     /**
      * Converts a focusDirection to orientation.
      *
-     * @param focusDirection One of {@link android.view.View#FOCUS_UP}, {@link android.view.View#FOCUS_DOWN},
-     *                       {@link android.view.View#FOCUS_LEFT}, {@link android.view.View#FOCUS_RIGHT},
-     *                       {@link android.view.View#FOCUS_BACKWARD}, {@link android.view.View#FOCUS_FORWARD}
+     * @param focusDirection One of {@link View#FOCUS_UP}, {@link View#FOCUS_DOWN},
+     *                       {@link View#FOCUS_LEFT}, {@link View#FOCUS_RIGHT},
+     *                       {@link View#FOCUS_BACKWARD}, {@link View#FOCUS_FORWARD}
      *                       or 0 for not applicable
-     * @return {@link android.support.v7.widget.LinearLayoutManager.RenderState#LAYOUT_START} or {@link android.support.v7.widget.LinearLayoutManager.RenderState#LAYOUT_END} if focus direction
-     * is applicable to current state, {@link android.support.v7.widget.LinearLayoutManager.RenderState#INVALID_LAYOUT} otherwise.
+     * @return {@link RenderState#LAYOUT_START} or {@link RenderState#LAYOUT_END} if focus direction
+     * is applicable to current state, {@link RenderState#INVALID_LAYOUT} otherwise.
      */
     private int convertFocusDirectionToLayoutDirection(int focusDirection) {
         switch (focusDirection) {
@@ -1681,8 +1681,8 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager {
             dest.writeInt(mAnchorLayoutFromEnd ? 1 : 0);
         }
 
-        public static final Creator<SavedState> CREATOR
-                = new Creator<SavedState>() {
+        public static final Parcelable.Creator<SavedState> CREATOR
+                = new Parcelable.Creator<SavedState>() {
             @Override
             public SavedState createFromParcel(Parcel in) {
                 return new SavedState(in);
