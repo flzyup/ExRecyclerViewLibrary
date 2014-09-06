@@ -16,6 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:authorities="com.ligux.tools.provider.res_provider"
+            android:name="com.ligux.tools.exrecyclerview.db.ResProvider"
+            android:exported="false"/>
     </application>
 
 </manifest>
